@@ -29,6 +29,10 @@ class Ofc extends BaseCoin {
     };
   }
 
+  getFamily() {
+    return 'ofc';
+  }
+
   getFullName() {
     return 'Offchain';
   }
@@ -38,6 +42,21 @@ class Ofc extends BaseCoin {
    */
   isValidMofNSetup({ m, n }) {
     return m === 1 && n === 1;
+  }
+
+  /**
+   * Return boolean indicating whether input is valid public key for the coin.
+   *
+   * @param {String} pub the pub to be checked
+   * @returns {Boolean} is it valid?
+   */
+  isValidPub(pub) {
+    try {
+      prova.HDNode.fromBase58(pub);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }
 
