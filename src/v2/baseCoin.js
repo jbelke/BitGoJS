@@ -13,6 +13,7 @@ const bitcoin = require('bitgo-utxo-lib');
 const bitcoinMessage = require('bitcoinjs-message');
 const Promise = require('bluebird');
 const co = Promise.coroutine;
+const _ = require('lodash');
 
 class BaseCoin {
 
@@ -117,8 +118,8 @@ class BaseCoin {
     }
 
     const constants = bitgo.getConstants();
-    if (constants.ofc && constants.ofc.tokens) {
-      const tokens = constants.ofc.tokens;
+    const tokens = _.get(constants, 'ofc.tokens');
+    if (tokens) {
       tokens.forEach((tokenConfig) => {
         const generatedToken = OFCToken.generateToken(tokenConfig);
         if (!coins[tokenConfig.type]) {

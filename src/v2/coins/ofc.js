@@ -1,6 +1,6 @@
 const BaseCoin = require('../baseCoin');
 const crypto = require('crypto');
-const prova = require('prova-lib');
+const bitGoUtxoLib = require('bitgo-utxo-lib');
 
 class Ofc extends BaseCoin {
 
@@ -21,7 +21,7 @@ class Ofc extends BaseCoin {
       // maximum entropy and gives us maximum security against cracking.
       seed = crypto.randomBytes(512 / 8);
     }
-    const extendedKey = prova.HDNode.fromSeedBuffer(seed);
+    const extendedKey = bitGoUtxoLib.HDNode.fromSeedBuffer(seed);
     const xpub = extendedKey.neutered().toBase58();
     return {
       pub: xpub,
@@ -52,7 +52,7 @@ class Ofc extends BaseCoin {
    */
   isValidPub(pub) {
     try {
-      prova.HDNode.fromBase58(pub);
+      bitGoUtxoLib.HDNode.fromBase58(pub);
       return true;
     } catch (e) {
       return false;

@@ -2,7 +2,6 @@ const Ofc = require('./ofc');
 const _ = require('lodash');
 const Promise = require('bluebird');
 const co = Promise.coroutine;
-const prova = require('prova-lib');
 
 class OFCToken extends Ofc {
 
