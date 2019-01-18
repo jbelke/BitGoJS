@@ -116,8 +116,8 @@ class BaseCoin {
       OFCToken = require('./coins/ofcToken');
     }
 
-    bitgo.fetchConstants()
-    .then(function(constants) {
+    const constants = bitgo.getConstants();
+    if (constants.ofc && constants.ofc.tokens) {
       const tokens = constants.ofc.tokens;
       tokens.forEach((tokenConfig) => {
         const generatedToken = OFCToken.generateToken(tokenConfig);
@@ -125,7 +125,7 @@ class BaseCoin {
           coins[tokenConfig.type] = generatedToken;
         }
       });
-    });
+    }
   }
   /**
    * This feature is mostly for browsers where we don't want to have a build with coins that people don't need

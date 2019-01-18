@@ -16,11 +16,11 @@ class OFCToken extends Ofc {
   }
 
   getChain() {
-    return this.type;
+    return 'ofc';
   }
 
   getFullName() {
-    return 'OFC Token';
+    return this.name;
   }
 
   getBaseFactor() {
